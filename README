@@ -1,0 +1,3 @@
+Demonstration files for Fourier Series methods to analytically solve one-dimensional linear PDEs.
+
+The main user-end files are heat_equation.m and wave_equation.m.
