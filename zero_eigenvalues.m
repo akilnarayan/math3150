@@ -28,6 +28,7 @@ if ( a == 0 ) && ( c == 0 )
 else %if ( a ~=0 ) && ( c ~= 0) 
 
   if abs( b/a - d/c - 1 ) < 1e-13
+    lambda = 0;
 
     k = [A(1,2)  -A(1,1)];
 

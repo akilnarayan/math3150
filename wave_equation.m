@@ -6,19 +6,20 @@ close all
 
 N = 128; % Number of eigenvalue/eigenfunction pairs to compute
 L = 1; % Length of the domain
-csp = 1.0; % u_t = csp^2 u_xx
+csp = 2.0; % u_tt = csp^2 u_xx
 
 % Initial data -- should be a function defined in a vectorized way
 % u(x,0) = f(x)
 % u_t(x,0) = g(x)
-f = @(x) -3*x.^2.*(1-x).^2.*exp(cos(4*x));
+%f = @(x) -3*x.*(1-x).^2.*exp(cos(4*x));
+f = @(x) x>=0.5;
 g = @(x) 10*x.*(1-x);
 
 % Boundary conditions
 %  a * u(0) + b * u'(0) = v(1)
 %  c * u(L) + d * u'(L) = v(2)
 a = 1; b = 0;
-c = 1; d = 0;
+c = 0; d = 1;
 v = [0; 0];
 
 tol = 1e-12;
@@ -43,6 +44,11 @@ end
 
 % Solve separation of variables eigenvalue problem
 [lambda0, v0] = zero_eigenvalues(A);
+if isempty(lambda0)
+  zero_ev = false;
+else
+  zero_ev = true;
+end
 [lambda, v] = positive_eigenvalues(A, N-length(lambda0));
 lambda = [lambda0; lambda]/L^2;
 v = [v0; v]/sqrt(L);
@@ -58,7 +64,11 @@ ac = zeros([N 1]);
 bc = zeros([N 1]);
 phinx = zeros([numel(x) N]);
 for n = 1:N
-  phinx(:,n) = v(n,1) * cos(sqrt(lambda(n))*x) + v(n,2) * sin(sqrt(lambda(n))*x);
+  if (zero_ev && (n==1))
+    phinx(:,n) = v(n,1) + v(n,2) * x;
+  else
+    phinx(:,n) = v(n,1) * cos(sqrt(lambda(n))*x) + v(n,2) * sin(sqrt(lambda(n))*x);
+  end
   ac(n) = sum(w.*ffx.*phinx(:,n));
   bc(n) = sum(w.*ggx.*phinx(:,n))/csp/sqrt(lambda(n));
 end
@@ -69,8 +79,8 @@ lineprops = {'linewidth', 3};
 labelprops = {'fontsize', 16, 'fontweight', 'b', 'interpreter', 'latex'};
 axesprops = {'fontsize', 16, 'fontweight', 'b'};
 
-ymin = -1.00;
-ymax = 1.00;
+ymin = -3.00;
+ymax = 3.00;
 
 dt = 0.005;
 T = 10;

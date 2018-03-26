@@ -39,6 +39,11 @@ end
 
 % Solve separation of variables eigenvalue problem
 [lambda0, v0] = zero_eigenvalues(A);
+if isempty(lambda0)
+  zero_ev = false;
+else
+  zero_ev = true;
+end
 [lambda, v] = positive_eigenvalues(A, N-length(lambda0));
 lambda = [lambda0; lambda]/L^2;
 v = [v0; v]/sqrt(L);
@@ -52,7 +57,11 @@ ffx = ff(x);
 c = zeros([N 1]);
 phinx = zeros([numel(x) N]);
 for n = 1:N
-  phinx(:,n) = v(n,1) * cos(sqrt(lambda(n))*x) + v(n,2) * sin(sqrt(lambda(n))*x);
+  if (zero_ev && (n==1))
+    phinx(:,n) = v(n,1) + v(n,2) * x;
+  else
+    phinx(:,n) = v(n,1) * cos(sqrt(lambda(n))*x) + v(n,2) * sin(sqrt(lambda(n))*x);
+  end
   c(n) = sum(w.*ffx.*phinx(:,n));
 end
 
