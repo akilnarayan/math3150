@@ -17,12 +17,6 @@ function[lambda, k] = positive_eigenvalues(A, N)
 %
 %   is an orthonormal eigenfunction corresponding to eigenvalue lambda(n) for n = 1, ..., N
 
-%
-% TODO: There's a bug in here somewhere....
-%       A = [1/sqrt(2) 1/sqrt(2); 1 0]
-%      produces eigenfunctions that don't respect the rhs Dirichlet homogeneity
-%      This example triggers the if statement for ( (b == 0) || (d == 0) )
-
 lambda = zeros([N 1]);
 k = zeros([N 2]);
 
