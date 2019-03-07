@@ -6,7 +6,7 @@ close all
 
 N = 128; % Number of eigenvalue/eigenfunction pairs to compute
 L = 1; % Length of the domain
-k = 0.01; % u_t = k u_xx
+k = 0.02; % u_t = k u_xx
 
 % Initial data -- should be a function defined in a vectorized way
 f = @(x) x.*(1-x).*exp(cos(4*x));
@@ -79,13 +79,13 @@ figure;
 subplot(2,2,1);
 set(plot(x, phinx*c, 'r'), lineprops{:});
 set(xlabel('$\mathbf{x}$'), labelprops{:});
-set(ylabel('$\mathbf{u(x,0) = f(x)}$'), labelprops{:});
+set(title('$\mathbf{u(x,0) = f(x)}$'), labelprops{:});
 set(gca, axesprops{:});
 
 subplot(2,2,2);
 set(plot(x, phinx(:,1:Nviz)*diag(c(1:Nviz))), lineprops{:});
 set(xlabel('$\mathbf{x}$'), labelprops{:});
-set(ylabel('$\mathbf{c_n \phi_n(x)}$ for $\mathbf{n=1, \ldots}$'), labelprops{:});
+set(title('$\mathbf{c_n \phi_n(x)}$ for $\mathbf{n=1, \ldots}$'), labelprops{:});
 set(gca, axesprops{:});
 
 subplot(2,2,3);
@@ -100,7 +100,7 @@ subplot(2,2,4);
 phins = plot(x, phinx(:,1:Nviz)*diag(c(1:Nviz)));
 for j = 1:numel(phins); set(phins(j), lineprops{:}); end;
 set(xlabel('$\mathbf{x}$'), labelprops{:});
-set(ylabel('$\mathbf{c_n \exp\left(-\lambda_n^2 t\right) \phi_n(x)}$ for $\mathbf{n=1, \ldots}$'), labelprops{:});
+set(title('$\mathbf{c_n \exp\left(-\lambda_n^2 t\right) \phi_n(x)}$ for $\mathbf{n=1, \ldots}$'), labelprops{:});
 set(gca, axesprops{:});
 
 pause

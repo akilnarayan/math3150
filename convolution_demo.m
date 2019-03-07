@@ -17,8 +17,8 @@ f = @(s) (1 - abs(s));
 
 g = @(s) 1/(0.4)*(abs(s) < 0.2);
 
-%t = 1;
-%g = @(s) 1/sqrt(4 * pi * t) * exp(-s.^2./(4*t));
+t = 1;
+g = @(s) 1/sqrt(4 * pi * t) * exp(-s.^2./(4*t));
 
 % Truncates functions outside [-1,1]
 fwindow = @(s) f(s).*(abs(s) <= 1);
@@ -37,7 +37,7 @@ subplot(2,1,1);
 fplot = plot(s, fintegrand, 'b', 'linewidth', 2);
 hold on;
 gplot = plot(s, gintegrand, 'r', 'linewidth', 2);
-axis([-2, 2, 0, 2]);
+axis([-2, 2, 0, 2.7]);
 set(gca, 'fontsize', 16, 'fontweight', 'b');
 set(xlabel('$s$'), 'interpreter', 'latex');
 set(legend('$f(s)$', '$g(x-s)$'), 'interpreter', 'latex');

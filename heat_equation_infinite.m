@@ -15,9 +15,9 @@ clear
 close all
 
 k = 1;
-f = @(x) cos(6*pi*x) .* (abs(x) <= 1/12);
+%f = @(x) cos(6*pi*x) .* (abs(x) <= 1/12);
 %f = @(x) (1 + cos(6*pi*x)) .* (abs(x) <= 6/12);
-%f = @(x) abs(x) <= 0.2;
+f = @(x) abs(x) <= 0.2;
 
 
 h = @(x,t) 1/sqrt(4*k*pi*t) * exp(-x.^2./(4*k*t));
@@ -27,7 +27,7 @@ h = @(x,t) 1/sqrt(4*k*pi*t) * exp(-x.^2./(4*k*t));
 x = linspace(-2, 2, 301).';
 u = double(f(x));
 
-T = 0.1;
+T = 1;
 dt = 0.001;
 t = 0;
 
