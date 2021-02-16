@@ -100,7 +100,7 @@ subplot(2,2,4);
 phins = plot(x, phinx(:,1:Nviz)*diag(c(1:Nviz)));
 for j = 1:numel(phins); set(phins(j), lineprops{:}); end;
 set(xlabel('$\mathbf{x}$'), labelprops{:});
-set(title('$\mathbf{c_n \exp\left(-\lambda_n^2 t\right) \phi_n(x)}$ for $\mathbf{n=1, \ldots}$'), labelprops{:});
+set(title('$\mathbf{c_n \exp\left(-\lambda_n k t\right) \phi_n(x)}$ for $\mathbf{n=1, \ldots}$'), labelprops{:});
 set(gca, axesprops{:});
 
 pause

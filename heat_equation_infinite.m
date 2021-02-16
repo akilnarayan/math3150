@@ -14,7 +14,7 @@
 clear
 close all
 
-k = 1;
+k = 0.1;
 %f = @(x) cos(6*pi*x) .* (abs(x) <= 1/12);
 %f = @(x) (1 + cos(6*pi*x)) .* (abs(x) <= 6/12);
 f = @(x) abs(x) <= 0.2;
