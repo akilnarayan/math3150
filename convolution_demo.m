@@ -17,7 +17,7 @@ f = @(s) (1 - abs(s));
 
 g = @(s) 1/(0.4)*(abs(s) < 0.2);
 
-t = 1;
+t = .1;
 g = @(s) 1/sqrt(4 * pi * t) * exp(-s.^2./(4*t));
 
 % Truncates functions outside [-1,1]
@@ -40,6 +40,7 @@ gplot = plot(s, gintegrand, 'r', 'linewidth', 2);
 axis([-2, 2, 0, 2.7]);
 set(gca, 'fontsize', 16, 'fontweight', 'b');
 set(xlabel('$s$'), 'interpreter', 'latex');
+set(title('Integrand'), 'interpreter', 'latex');
 set(legend('$f(s)$', '$g(x-s)$'), 'interpreter', 'latex');
 
 xticks = [-2, -1, 0, 1, 2];
@@ -53,7 +54,8 @@ dotplot = plot(-2, 0, 'k.', 'markersize', 20);
 axis([-2, 2, 0, 1]);
 set(gca, 'fontsize', 16, 'fontweight', 'b');
 set(xlabel('$x$'), 'interpreter', 'latex');
-set(ylabel('$2\pi h$'), 'interpreter', 'latex');
+set(title('Convolution $f \ast g$'), 'interpreter', 'latex');
+set(ylabel('$2\pi (f \ast g)$'), 'interpreter', 'latex');
 pause
 
 s2 = [s.', flipud(s).'];
@@ -82,6 +84,7 @@ for qx = 1:numel(x)
     set(prevfill, 'Visible', 'off');
   end
   prevfill = fill(s2, inbetween, 'k');
+  prevfill.Annotation.LegendInformation.IconDisplayStyle = 'off';
   alpha(prevfill, 0.5);
 
   set(hplot, 'xdata', x(1:qx), 'ydata', h(1:qx));
